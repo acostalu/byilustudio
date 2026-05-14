@@ -720,10 +720,18 @@
   /* ── CONTACT ── */
   .contact {
     padding: 8rem 6rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8rem;
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    text-align: center;
+  }
+
+  .contact .contact-links {
+    align-items: center;
+  }
+
+  .contact .contact-text {
+    max-width: 480px;
   }
 
   .contact-content {}
@@ -790,77 +798,7 @@
     border-color: var(--gold);
   }
 
-  .contact-form {
-    background: var(--cream);
-    padding: 3.5rem;
-  }
 
-  .form-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    font-style: italic;
-    color: var(--brown);
-    margin-bottom: 2rem;
-  }
-
-  .form-group {
-    margin-bottom: 1.5rem;
-  }
-
-  .form-label {
-    display: block;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.72rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 0.6rem;
-  }
-
-  .form-input,
-  .form-select,
-  .form-textarea {
-    width: 100%;
-    padding: 0.9rem 1rem;
-    background: var(--warm-white);
-    border: 1px solid var(--sand);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.9rem;
-    color: var(--dark);
-    outline: none;
-    transition: border-color 0.3s ease;
-    appearance: none;
-  }
-
-  .form-input:focus,
-  .form-select:focus,
-  .form-textarea:focus {
-    border-color: var(--gold);
-  }
-
-  .form-textarea {
-    height: 100px;
-    resize: none;
-  }
-
-  .form-submit {
-    width: 100%;
-    background: var(--brown);
-    color: var(--cream);
-    border: none;
-    padding: 1.1rem;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.8rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: background 0.3s ease;
-    margin-top: 0.5rem;
-  }
-
-  .form-submit:hover {
-    background: var(--gold);
-  }
 
   /* ── FOOTER ── */
   footer {
@@ -944,7 +882,7 @@
     .portfolio-item:first-child { grid-row: span 1; }
     .process-steps { grid-template-columns: 1fr 1fr; gap: 3rem; }
     .process-steps::before { display: none; }
-    .contact { grid-template-columns: 1fr; gap: 4rem; }
+    .contact { padding: 5rem 2rem; }
     .section-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
     .section-desc { text-align: left; }
     footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem; }
@@ -955,7 +893,7 @@
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">Byilu Studio</div>
+  <div class="nav-logo">By Ilu Studio</div>
   <ul class="nav-links">
     <li><a href="#servicios">Servicios</a></li>
     <li><a href="#nosotros">Nosotros</a></li>
@@ -983,7 +921,7 @@
       <div class="circle-deco"></div>
       <div class="hero-circle-inner">
         <div class="circle-logo">
-          Bylu<span>studio</span>
+          By Ilu<span>Studio</span>
         </div>
         <div class="circle-sub">Diseño que cuenta historias</div>
       </div>
@@ -1056,7 +994,7 @@
   <div class="about-visual reveal">
     <div class="about-circle-wrap">
       <div class="about-circle-logo">
-        <div class="big">Bylu<br>studio</div>
+        <div class="big">By Ilu<br>Studio</div>
         <div class="small">Estudio Creativo</div>
       </div>
     </div>
@@ -1213,34 +1151,13 @@
       </a>
     </div>
   </div>
-  <div class="contact-form reveal reveal-delay-2">
-    <div class="form-title">Contanos tu idea</div>
-    <div class="form-group">
-      <label class="form-label">Tu nombre</label>
-      <input type="text" class="form-input" placeholder="María García">
-    </div>
-    <div class="form-group">
-      <label class="form-label">Tipo de diseño</label>
-      <select class="form-select">
-        <option>Invitación</option>
-        <option>Poster</option>
-        <option>Banner</option>
-        <option>Historia de Instagram</option>
-        <option>Otro</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Contanos tu idea</label>
-      <textarea class="form-textarea" placeholder="Describí tu evento, estilo, colores..."></textarea>
-    </div>
-    <button class="form-submit">Enviar consulta ✦</button>
-  </div>
+
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">Byilu studio</div>
-  <div class="footer-copy">© 2025 Byilu Studio · Estudio Creativo by Iliana · Todos los derechos reservados</div>
+  <div class="footer-logo">By Ilu Studio</div>
+  <div class="footer-copy">© 2025 By Ilu Studio · Estudio Creativo by Iliana · Todos los derechos reservados</div>
   <div class="footer-star">✦</div>
 </footer>
 
