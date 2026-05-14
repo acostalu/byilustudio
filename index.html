@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Byilu Studio — Estudio Creativo by Iliana</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F5EFE4;
+    --warm-white: #FAF7F2;
+    --sand: #E8DCC8;
+    --gold: #C9A96E;
+    --gold-light: #DFC08A;
+    --dark: #1A1510;
+    --brown: #3D2B1F;
+    --muted: #7A6A5A;
+    --accent: #D4956A;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--warm-white);
+    color: var(--dark);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* Grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 1.5rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    mix-blend-mode: multiply;
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    color: var(--brown);
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .nav-links a:hover {
+    color: var(--gold);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10rem 5rem 6rem 6rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-tag {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.2s forwards;
+  }
+
+  .hero-tag::before {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 6vw, 5.5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    color: var(--brown);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.4s forwards;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold);
+    font-weight: 400;
+  }
+
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--muted);
+    max-width: 400px;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.6s forwards;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.8s forwards;
+  }
+
+  .btn-primary {
+    background: var(--brown);
+    color: var(--cream);
+    padding: 1rem 2.5rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gold);
+    transform: translateX(-100%);
+    transition: transform 0.4s ease;
+  }
+
+  .btn-primary:hover::before {
+    transform: translateX(0);
+  }
+
+  .btn-primary span {
+    position: relative;
+    z-index: 1;
+  }
+
+  .btn-secondary {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: var(--muted);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.3s ease;
+  }
+
+  .btn-secondary:hover {
+    color: var(--gold);
+  }
+
+  .btn-secondary::after {
+    content: '→';
+  }
+
+  .hero-right {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--sand);
+    clip-path: polygon(8% 0%, 100% 0%, 100% 100%, 0% 100%);
+  }
+
+  .hero-circle {
+    width: 380px;
+    height: 380px;
+    border-radius: 50%;
+    background: var(--cream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 0 40px 80px rgba(61,43,31,0.15);
+    animation: floatCircle 6s ease-in-out infinite;
+  }
+
+  .hero-circle-inner {
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .circle-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-style: italic;
+    color: var(--brown);
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+
+  .circle-logo span {
+    font-size: 3rem;
+    font-weight: 700;
+    font-style: normal;
+    display: block;
+  }
+
+  .circle-sub {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .circle-deco {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 1px solid rgba(201,169,110,0.3);
+    animation: rotateDeco 20s linear infinite;
+  }
+
+  .circle-deco::before,
+  .circle-deco::after {
+    content: '✦';
+    position: absolute;
+    color: var(--gold);
+    font-size: 0.8rem;
+  }
+
+  .circle-deco::before { top: -10px; left: 50%; transform: translateX(-50%); }
+  .circle-deco::after { bottom: -10px; left: 50%; transform: translateX(-50%); }
+
+  .hero-scatter {
+    position: absolute;
+    font-size: 1.2rem;
+    opacity: 0.4;
+    animation: sparkle 3s ease-in-out infinite;
+  }
+
+  .hero-scatter:nth-child(1) { top: 20%; left: 15%; animation-delay: 0s; }
+  .hero-scatter:nth-child(2) { top: 70%; left: 80%; animation-delay: 1s; }
+  .hero-scatter:nth-child(3) { top: 85%; left: 20%; animation-delay: 2s; }
+
+  /* ── STATS ── */
+  .stats-bar {
+    background: var(--brown);
+    padding: 2rem 6rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+  }
+
+  .stat-item {
+    text-align: center;
+    color: var(--cream);
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(245,239,228,0.6);
+    margin-top: 0.3rem;
+  }
+
+  .stat-divider {
+    width: 1px;
+    height: 50px;
+    background: rgba(201,169,110,0.3);
+  }
+
+  /* ── SERVICES ── */
+  .services {
+    padding: 8rem 6rem;
+    position: relative;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 5rem;
+  }
+
+  .section-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    font-weight: 700;
+    color: var(--brown);
+    line-height: 1.1;
+  }
+
+  .section-title em {
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .section-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    color: var(--muted);
+    max-width: 300px;
+    line-height: 1.7;
+    text-align: right;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+  }
+
+  .service-card {
+    background: var(--cream);
+    padding: 3rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    group: true;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+  }
+
+  .service-card:hover {
+    background: var(--brown);
+  }
+
+  .service-card:hover::before {
+    transform: scaleX(1);
+  }
+
+  .service-card:hover .service-icon,
+  .service-card:hover .service-name,
+  .service-card:hover .service-desc {
+    color: var(--cream);
+  }
+
+  .service-card:hover .service-num {
+    color: rgba(245,239,228,0.2);
+  }
+
+  .service-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    font-weight: 700;
+    color: rgba(61,43,31,0.08);
+    line-height: 1;
+    margin-bottom: 1rem;
+    transition: color 0.4s ease;
+  }
+
+  .service-icon {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    display: block;
+    transition: color 0.4s ease;
+  }
+
+  .service-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--brown);
+    margin-bottom: 1rem;
+    transition: color 0.4s ease;
+  }
+
+  .service-desc {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: var(--muted);
+    transition: color 0.4s ease;
+  }
+
+  /* ── ABOUT ── */
+  .about {
+    padding: 8rem 6rem;
+    background: var(--sand);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8rem;
+    align-items: center;
+  }
+
+  .about-visual {
+    position: relative;
+  }
+
+  .about-circle-wrap {
+    width: 340px;
+    height: 340px;
+    border-radius: 50%;
+    background: var(--cream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 30px 30px 0 var(--gold-light);
+    position: relative;
+    margin: 0 auto;
+  }
+
+  .about-circle-logo {
+    text-align: center;
+  }
+
+  .about-circle-logo .big {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-style: italic;
+    color: var(--brown);
+    line-height: 1;
+  }
+
+  .about-circle-logo .small {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .about-badge {
+    position: absolute;
+    bottom: -15px;
+    right: 30px;
+    background: var(--brown);
+    color: var(--cream);
+    padding: 0.8rem 1.5rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .about-content {}
+
+  .about-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-style: italic;
+    color: var(--brown);
+    line-height: 1.4;
+    margin-bottom: 2rem;
+  }
+
+  .about-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.9;
+    margin-bottom: 2rem;
+  }
+
+  .about-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .tag {
+    padding: 0.5rem 1.2rem;
+    border: 1px solid var(--gold);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  /* ── PORTFOLIO ── */
+  .portfolio {
+    padding: 8rem 6rem;
+  }
+
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 280px 280px;
+    gap: 2px;
+    margin-top: 4rem;
+  }
+
+  .portfolio-item {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .portfolio-item:first-child {
+    grid-row: span 2;
+  }
+
+  .portfolio-bg {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s ease;
+  }
+
+  .portfolio-item:hover .portfolio-bg {
+    transform: scale(1.05);
+  }
+
+  .p1 { background: linear-gradient(135deg, #E8DCC8 0%, #C9A96E 100%); }
+  .p2 { background: linear-gradient(135deg, #3D2B1F 0%, #7A6A5A 100%); }
+  .p3 { background: linear-gradient(135deg, #D4956A 0%, #E8DCC8 100%); }
+  .p4 { background: linear-gradient(135deg, #C9A96E 0%, #3D2B1F 100%); }
+  .p5 { background: linear-gradient(135deg, #F5EFE4 0%, #C9A96E 100%); }
+
+  .portfolio-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(26,21,16,0.75);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .portfolio-item:hover .portfolio-overlay {
+    opacity: 1;
+  }
+
+  .portfolio-overlay-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-style: italic;
+    color: var(--cream);
+    margin-bottom: 0.5rem;
+  }
+
+  .portfolio-overlay-type {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  /* Portfolio placeholder art */
+  .p-art {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .p-art svg {
+    width: 60%;
+    height: 60%;
+    opacity: 0.7;
+  }
+
+  /* ── PROCESS ── */
+  .process {
+    padding: 8rem 6rem;
+    background: var(--brown);
+    color: var(--cream);
+  }
+
+  .process .section-title {
+    color: var(--cream);
+  }
+
+  .process .section-label {
+    color: var(--gold-light);
+  }
+
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    margin-top: 5rem;
+    position: relative;
+  }
+
+  .process-steps::before {
+    content: '';
+    position: absolute;
+    top: 35px;
+    left: 12%;
+    right: 12%;
+    height: 1px;
+    background: rgba(201,169,110,0.3);
+  }
+
+  .process-step {
+    padding: 0 2rem;
+    text-align: center;
+    position: relative;
+  }
+
+  .step-num {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 1px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 2rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--gold);
+    background: var(--brown);
+    position: relative;
+    z-index: 1;
+  }
+
+  .step-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--cream);
+    margin-bottom: 1rem;
+  }
+
+  .step-desc {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: rgba(245,239,228,0.6);
+  }
+
+  /* ── CONTACT ── */
+  .contact {
+    padding: 8rem 6rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8rem;
+    align-items: center;
+  }
+
+  .contact-content {}
+
+  .contact-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    font-weight: 700;
+    color: var(--brown);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-title em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--gold);
+  }
+
+  .contact-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 3rem;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    text-decoration: none;
+    color: var(--brown);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+  }
+
+  .contact-link:hover {
+    color: var(--gold);
+  }
+
+  .contact-link-icon {
+    width: 45px;
+    height: 45px;
+    border: 1px solid var(--sand);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  .contact-link:hover .contact-link-icon {
+    background: var(--gold);
+    border-color: var(--gold);
+  }
+
+  .contact-form {
+    background: var(--cream);
+    padding: 3.5rem;
+  }
+
+  .form-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-style: italic;
+    color: var(--brown);
+    margin-bottom: 2rem;
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-label {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.6rem;
+  }
+
+  .form-input,
+  .form-select,
+  .form-textarea {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    background: var(--warm-white);
+    border: 1px solid var(--sand);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--dark);
+    outline: none;
+    transition: border-color 0.3s ease;
+    appearance: none;
+  }
+
+  .form-input:focus,
+  .form-select:focus,
+  .form-textarea:focus {
+    border-color: var(--gold);
+  }
+
+  .form-textarea {
+    height: 100px;
+    resize: none;
+  }
+
+  .form-submit {
+    width: 100%;
+    background: var(--brown);
+    color: var(--cream);
+    border: none;
+    padding: 1.1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-top: 0.5rem;
+  }
+
+  .form-submit:hover {
+    background: var(--gold);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark);
+    padding: 3rem 6rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--cream);
+  }
+
+  .footer-copy {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    color: rgba(245,239,228,0.4);
+    letter-spacing: 0.05em;
+  }
+
+  .footer-star {
+    color: var(--gold);
+    font-size: 1.5rem;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes floatCircle {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+
+  @keyframes rotateDeco {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes sparkle {
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.3); }
+  }
+
+  /* Scroll reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ── MOBILE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1.5rem 2rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 8rem 2rem 4rem; }
+    .hero-right { min-height: 350px; clip-path: none; }
+    .hero-circle { width: 240px; height: 240px; }
+    .stats-bar { padding: 2rem; gap: 1rem; flex-wrap: wrap; }
+    .services, .about, .portfolio, .process, .contact { padding: 5rem 2rem; }
+    .services-grid { grid-template-columns: 1fr 1fr; }
+    .about { grid-template-columns: 1fr; gap: 4rem; }
+    .portfolio-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+    .portfolio-item:first-child { grid-row: span 1; }
+    .process-steps { grid-template-columns: 1fr 1fr; gap: 3rem; }
+    .process-steps::before { display: none; }
+    .contact { grid-template-columns: 1fr; gap: 4rem; }
+    .section-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    .section-desc { text-align: left; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Byilu Studio</div>
+  <ul class="nav-links">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Estudio Creativo ✦ by Iliana</div>
+    <h1 class="hero-title">Diseño que<br><em>cuenta</em><br>historias</h1>
+    <p class="hero-subtitle">Invitaciones, posters, banners e historias hechas con detalle para tus momentos y tus redes.</p>
+    <div class="hero-cta">
+      <a href="#contacto" class="btn-primary"><span>Hacer un pedido</span></a>
+      <a href="#portfolio" class="btn-secondary">Ver trabajos</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <span class="hero-scatter">✦</span>
+    <span class="hero-scatter">✦</span>
+    <span class="hero-scatter">✦</span>
+    <div class="hero-circle">
+      <div class="circle-deco"></div>
+      <div class="hero-circle-inner">
+        <div class="circle-logo">
+          Bylu<span>studio</span>
+        </div>
+        <div class="circle-sub">Diseño que cuenta historias</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-item reveal">
+    <div class="stat-num">9</div>
+    <div class="stat-label">Publicaciones</div>
+  </div>
+  <div class="stat-divider"></div>
+  <div class="stat-item reveal reveal-delay-1">
+    <div class="stat-num">25</div>
+    <div class="stat-label">Seguidores</div>
+  </div>
+  <div class="stat-divider"></div>
+  <div class="stat-item reveal reveal-delay-2">
+    <div class="stat-num">100%</div>
+    <div class="stat-label">Personalizado</div>
+  </div>
+  <div class="stat-divider"></div>
+  <div class="stat-item reveal reveal-delay-3">
+    <div class="stat-num">✦</div>
+    <div class="stat-label">Hecho con detalle</div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="servicios">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-label">Lo que creamos</div>
+      <h2 class="section-title">Nuestros<br><em>servicios</em></h2>
+    </div>
+    <p class="section-desc">Cada pieza diseñada a medida, con atención al detalle que te mereces.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-num">01</div>
+      <span class="service-icon">💌</span>
+      <div class="service-name">Invitaciones</div>
+      <p class="service-desc">Diseño personalizado para cumpleaños, bodas, baby showers y todo evento especial.</p>
+    </div>
+    <div class="service-card reveal reveal-delay-1">
+      <div class="service-num">02</div>
+      <span class="service-icon">🖼</span>
+      <div class="service-name">Posters</div>
+      <p class="service-desc">Arte visual que comunica, decora e impacta en cualquier formato y soporte.</p>
+    </div>
+    <div class="service-card reveal reveal-delay-2">
+      <div class="service-num">03</div>
+      <span class="service-icon">✨</span>
+      <div class="service-name">Banners</div>
+      <p class="service-desc">Banners para redes sociales, eventos y publicidad que generan presencia.</p>
+    </div>
+    <div class="service-card reveal reveal-delay-3">
+      <div class="service-num">04</div>
+      <span class="service-icon">📱</span>
+      <div class="service-name">Historias</div>
+      <p class="service-desc">Historias animadas y estáticas para Instagram con estética única y personal.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="nosotros">
+  <div class="about-visual reveal">
+    <div class="about-circle-wrap">
+      <div class="about-circle-logo">
+        <div class="big">Bylu<br>studio</div>
+        <div class="small">Estudio Creativo</div>
+      </div>
+    </div>
+    <div class="about-badge">by Iliana ✦</div>
+  </div>
+  <div class="about-content reveal reveal-delay-2">
+    <div class="section-label">Sobre nosotros</div>
+    <blockquote class="about-quote">"Diseño personalizado para tus momentos y tus redes."</blockquote>
+    <p class="about-text">En Byilu Studio creemos que cada diseño tiene el poder de contar una historia. Trabajamos con dedicación y cariño en cada pieza, asegurándonos de que refleje tu esencia y conecte con tu audiencia de manera auténtica.</p>
+    <p class="about-text">Desde invitaciones únicas hasta contenido visual para redes, cada detalle importa. Pedidos y consultas por DM.</p>
+    <div class="about-tags">
+      <span class="tag">Personalizado</span>
+      <span class="tag">Con detalle</span>
+      <span class="tag">Para tus redes</span>
+      <span class="tag">Para tus momentos</span>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="portfolio" id="portfolio">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-label">Trabajos</div>
+      <h2 class="section-title">Nuestro<br><em>portfolio</em></h2>
+    </div>
+    <p class="section-desc">Cada pieza es única. Así como tú.</p>
+  </div>
+  <div class="portfolio-grid">
+    <div class="portfolio-item reveal">
+      <div class="portfolio-bg p1 p-art">
+        <svg viewBox="0 0 200 300" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="120" r="70" fill="none" stroke="rgba(61,43,31,0.3)" stroke-width="1"/>
+          <circle cx="100" cy="120" r="50" fill="none" stroke="rgba(61,43,31,0.2)" stroke-width="1"/>
+          <text x="100" y="115" text-anchor="middle" font-family="Georgia" font-size="18" fill="rgba(61,43,31,0.6)" font-style="italic">Bylu</text>
+          <text x="100" y="135" text-anchor="middle" font-family="Georgia" font-size="24" fill="rgba(61,43,31,0.7)" font-weight="bold">studio</text>
+          <text x="100" y="155" text-anchor="middle" font-family="Georgia" font-size="9" fill="rgba(61,43,31,0.4)" letter-spacing="3">DISEÑO ✦ CREATIVO</text>
+          <text x="100" y="240" text-anchor="middle" font-family="Georgia" font-size="10" fill="rgba(61,43,31,0.4)">Invitación de boda</text>
+        </svg>
+      </div>
+      <div class="portfolio-overlay">
+        <div class="portfolio-overlay-name">Invitación de boda</div>
+        <div class="portfolio-overlay-type">Diseño personalizado</div>
+      </div>
+    </div>
+    <div class="portfolio-item reveal reveal-delay-1">
+      <div class="portfolio-bg p2 p-art">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <rect x="40" y="40" width="120" height="120" fill="none" stroke="rgba(201,169,110,0.5)" stroke-width="1"/>
+          <text x="100" y="95" text-anchor="middle" font-family="Georgia" font-size="14" fill="rgba(245,239,228,0.7)" font-style="italic">Historia</text>
+          <text x="100" y="115" text-anchor="middle" font-family="Georgia" font-size="20" fill="rgba(201,169,110,0.8)">✦</text>
+          <text x="100" y="130" text-anchor="middle" font-family="Georgia" font-size="9" fill="rgba(245,239,228,0.4)" letter-spacing="2">INSTAGRAM</text>
+        </svg>
+      </div>
+      <div class="portfolio-overlay">
+        <div class="portfolio-overlay-name">Historia de Instagram</div>
+        <div class="portfolio-overlay-type">Redes Sociales</div>
+      </div>
+    </div>
+    <div class="portfolio-item reveal reveal-delay-2">
+      <div class="portfolio-bg p3 p-art">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="100" r="60" fill="none" stroke="rgba(61,43,31,0.3)" stroke-width="1"/>
+          <text x="100" y="90" text-anchor="middle" font-family="Georgia" font-size="11" fill="rgba(61,43,31,0.6)">Baby Shower</text>
+          <text x="100" y="110" text-anchor="middle" font-family="Georgia" font-size="22" fill="rgba(61,43,31,0.5)">🌸</text>
+          <text x="100" y="130" text-anchor="middle" font-family="Georgia" font-size="9" fill="rgba(61,43,31,0.4)">Invitación</text>
+        </svg>
+      </div>
+      <div class="portfolio-overlay">
+        <div class="portfolio-overlay-name">Baby Shower</div>
+        <div class="portfolio-overlay-type">Invitación</div>
+      </div>
+    </div>
+    <div class="portfolio-item reveal reveal-delay-1">
+      <div class="portfolio-bg p4 p-art">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <rect x="30" y="50" width="140" height="100" rx="2" fill="none" stroke="rgba(245,239,228,0.4)" stroke-width="1"/>
+          <text x="100" y="90" text-anchor="middle" font-family="Georgia" font-size="11" fill="rgba(245,239,228,0.7)">Banner</text>
+          <text x="100" y="110" text-anchor="middle" font-family="Georgia" font-size="11" fill="rgba(201,169,110,0.8)">Corporativo</text>
+          <text x="100" y="130" text-anchor="middle" font-family="Georgia" font-size="16" fill="rgba(245,239,228,0.5)">✦</text>
+        </svg>
+      </div>
+      <div class="portfolio-overlay">
+        <div class="portfolio-overlay-name">Banner corporativo</div>
+        <div class="portfolio-overlay-type">Branding</div>
+      </div>
+    </div>
+    <div class="portfolio-item reveal reveal-delay-2">
+      <div class="portfolio-bg p5 p-art">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="100,30 120,80 175,80 130,110 145,165 100,135 55,165 70,110 25,80 80,80" fill="none" stroke="rgba(201,169,110,0.5)" stroke-width="1"/>
+          <text x="100" y="105" text-anchor="middle" font-family="Georgia" font-size="10" fill="rgba(61,43,31,0.6)">Poster</text>
+          <text x="100" y="120" text-anchor="middle" font-family="Georgia" font-size="9" fill="rgba(61,43,31,0.4)" letter-spacing="1">EVENTO ✦</text>
+        </svg>
+      </div>
+      <div class="portfolio-overlay">
+        <div class="portfolio-overlay-name">Poster de evento</div>
+        <div class="portfolio-overlay-type">Diseño editorial</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-label">Cómo trabajamos</div>
+      <h2 class="section-title" style="color:var(--cream)">El <em style="color:var(--gold)">proceso</em></h2>
+    </div>
+  </div>
+  <div class="process-steps">
+    <div class="process-step reveal">
+      <div class="step-num">01</div>
+      <div class="step-name">Consulta</div>
+      <p class="step-desc">Escribinos por DM con tu idea, fecha y detalles del evento o proyecto.</p>
+    </div>
+    <div class="process-step reveal reveal-delay-1">
+      <div class="step-num">02</div>
+      <div class="step-name">Propuesta</div>
+      <p class="step-desc">Te enviamos una propuesta de diseño personalizada según tu estilo y necesidades.</p>
+    </div>
+    <div class="process-step reveal reveal-delay-2">
+      <div class="step-num">03</div>
+      <div class="step-name">Revisiones</div>
+      <p class="step-desc">Ajustamos el diseño hasta que quede exactamente como lo imaginaste.</p>
+    </div>
+    <div class="process-step reveal reveal-delay-3">
+      <div class="step-num">04</div>
+      <div class="step-name">Entrega</div>
+      <p class="step-desc">Recibís el archivo final listo para imprimir o publicar en tus redes.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contacto">
+  <div class="contact-content reveal">
+    <div class="section-label">Hagamos algo juntos</div>
+    <h2 class="contact-title">¿Lista para tu<br><em>diseño?</em></h2>
+    <p class="contact-text">Escribinos y contanos qué tenés en mente. Cada pedido es único y especial para nosotros. ✨</p>
+    <div class="contact-links">
+      <a href="https://instagram.com/byilustudio" class="contact-link" target="_blank">
+        <div class="contact-link-icon">📸</div>
+        <span>@byilustudio</span>
+      </a>
+      <a href="#" class="contact-link">
+        <div class="contact-link-icon">💬</div>
+        <span>Pedidos y consultas por DM</span>
+      </a>
+      <a href="#" class="contact-link">
+        <div class="contact-link-icon">✦</div>
+        <span>Estudio Creativo by Iliana</span>
+      </a>
+    </div>
+  </div>
+  <div class="contact-form reveal reveal-delay-2">
+    <div class="form-title">Contanos tu idea</div>
+    <div class="form-group">
+      <label class="form-label">Tu nombre</label>
+      <input type="text" class="form-input" placeholder="María García">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Tipo de diseño</label>
+      <select class="form-select">
+        <option>Invitación</option>
+        <option>Poster</option>
+        <option>Banner</option>
+        <option>Historia de Instagram</option>
+        <option>Otro</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Contanos tu idea</label>
+      <textarea class="form-textarea" placeholder="Describí tu evento, estilo, colores..."></textarea>
+    </div>
+    <button class="form-submit">Enviar consulta ✦</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Byilu studio</div>
+  <div class="footer-copy">© 2025 Byilu Studio · Estudio Creativo by Iliana · Todos los derechos reservados</div>
+  <div class="footer-star">✦</div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
